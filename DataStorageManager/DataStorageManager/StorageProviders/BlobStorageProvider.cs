@@ -81,7 +81,7 @@ namespace DataStorageManager.StorageProviders
         {
             using (var client = new StorageClient(this.blobClient, path))
             {
-                return await client.blockBlob.DownloadTextAsync(this.encoding, null, this.options, null);
+                return await client.blockBlob.DownloadTextAsync(this.encoding, null, this.options, null).ConfigureAwait(false);
             }
         }
 
@@ -90,7 +90,7 @@ namespace DataStorageManager.StorageProviders
             using (var client = new StorageClient(this.blobClient, path, true))
             {
                 var buffer = this.encoding.GetBytes(data);
-                await client.blockBlob.UploadFromByteArrayAsync(buffer, 0, buffer.Count(), null, this.options, null);
+                await client.blockBlob.UploadFromByteArrayAsync(buffer, 0, buffer.Count(), null, this.options, null).ConfigureAwait(false);
             }
         }
 
@@ -98,7 +98,7 @@ namespace DataStorageManager.StorageProviders
         {
             using (var client = new StorageClient(this.blobClient, path))
             {
-                await client.blockBlob.DeleteAsync();
+                await client.blockBlob.DeleteAsync().ConfigureAwait(false);
             }
         }
     }

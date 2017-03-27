@@ -29,14 +29,14 @@ namespace DataStorageManager
 
         public async Task<DataType> Get()
         {
-            var jsonData = await this.dataRepository.Read();
+            var jsonData = await this.dataRepository.Read().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<DataType>(jsonData);
         }
 
         public async Task Save(DataType data)
         {
             var jsonData = JsonConvert.SerializeObject(data);
-            await this.dataRepository.Write(jsonData);
+            await this.dataRepository.Write(jsonData).ConfigureAwait(false);
         }
 
     }

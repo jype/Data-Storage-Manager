@@ -42,7 +42,7 @@ namespace DataStorageManager.Repositories
                     item = new CacheItem
                     {
                         timestamp = DateTime.UtcNow,
-                        data = await this.storageProvider.ReadString(this.path)
+                        data = await this.storageProvider.ReadString(this.path).ConfigureAwait(false)
                     };
             }
 
@@ -51,7 +51,7 @@ namespace DataStorageManager.Repositories
 
         public async Task Write(string data)
         {
-            await this.storageProvider.WriteString(this.path, data);
+            await this.storageProvider.WriteString(this.path, data).ConfigureAwait(false);
             cacheList[this.path] = new CacheItem
             {
                 timestamp = DateTime.UtcNow,
